@@ -31,7 +31,6 @@ const TEMPLATE_MEALS = [
 ];
 
 const Available = () => {
-
   return (
     <>
       <section className={classes.meals}>

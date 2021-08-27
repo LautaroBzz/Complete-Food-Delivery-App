@@ -11,7 +11,7 @@ const FoodItemForm = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
     const enteredAmount = amountInputRef.current.value;
-    const enteredAmountNumber = +enteredAmount;
+    const enteredAmountNumber = +enteredAmount;   // must convert to a number
     if (enteredAmount.trim().length === 0 || enteredAmountNumber < 1 || enteredAmountNumber > 5) {
       setAmountValid(false);
       return;
@@ -23,7 +23,7 @@ const FoodItemForm = (props) => {
     <>
       <form className={classes.form} onSubmit={submitHandler}>
         <Input 
-          ref={amountInputRef}
+          ref={amountInputRef}  // "Ref" previously set on the "Input" component for it to work
           label="Amount" 
           input={{
             id:"amount" + props.id, 
@@ -32,9 +32,9 @@ const FoodItemForm = (props) => {
             max:"5", 
             step:"1", 
             defaultValue:"1"
-        }}
+          }}
         />
-        <button>Add to Cart</button>
+        <button type="submit">Add to Cart</button>
         {!amountValid && <p>Please enter a valid amount (1-5)</p>}
       </form>
     </>

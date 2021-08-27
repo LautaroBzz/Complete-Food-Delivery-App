@@ -2,7 +2,7 @@
 import classes from "./Input.module.css";
 import React from "react";
 
-const Input = React.forwardRef((props, ref) => {
+const Input = React.forwardRef((props, ref) => {  // Set so the Ref works on this custom component
   return (
     <>
       <div className={classes.input}>

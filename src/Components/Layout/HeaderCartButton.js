@@ -18,7 +18,7 @@ const HeaderCartButton = (props) => {
   const buttonclasses = `${classes.button} ${buttonIsLit ? classes.bump : ""}`;
 
   useEffect(() => {
-    if(cartCtx.items.length === 0){
+    if(items.length === 0){
       return;
     };
 
