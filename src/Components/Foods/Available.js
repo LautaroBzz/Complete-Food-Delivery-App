@@ -1,43 +1,50 @@
 
+import { useEffect, useState } from "react";
+
 import classes from "./Available.module.css";
 import Card from "../UI/Card";
-import FoodItem from "./SingleFoodItem/FoodItem";
-
-const TEMPLATE_MEALS = [
-  {
-    id: 'm1',
-    name: 'Canoli',
-    description: 'Best canoli ever!',
-    price: 22.99,
-  },
-  {
-    id: 'm2',
-    name: 'Pasta',
-    description: 'Best pasta ever!',
-    price: 16.5,
-  },
-  {
-    id: 'm3',
-    name: 'Rissoto',
-    description: 'Best rissoto ever!',
-    price: 12.99,
-  },
-  {
-    id: 'Gelatto',
-    name: 'Green Bowl',
-    description: 'Best gelatto ever!',
-    price: 18.99,
-  },
-];
+import FoodItem from "./SingleFoodItem/FoodItem"; 
 
 const Available = () => {
+  const [foods, setFoods] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect (() => {
+    const fetchfoods = async () => {
+      const response = await fetch("https://food-app-6818d-default-rtdb.firebaseio.com/meals.json");
+      const data = await response.json();
+
+      const loadedmenu = [];
+
+      for (const key in data) {
+        loadedmenu.push({
+          id: key,
+          name: data[key].name,
+          description: data[key].description,
+          price: data[key].price,
+        })
+      };
+      setFoods(loadedmenu);
+      setLoading(false);
+    };
+    fetchfoods();
+  }, []);
+
+  if (loading) {
+    return (
+      <section className={classes.loading}>
+        <h3>Loading...</h3>
+      </section>
+    )
+  };
+
   return (
     <>
       <section className={classes.meals}>
         <Card>
           <ul>
             {
-              TEMPLATE_MEALS.map((meal) => (
+              foods.map((meal) => (
                 <FoodItem 
                   id={meal.id}
                   key={meal.id} 
@@ -45,7 +52,8 @@ const Available = () => {
                   description={meal.description}
                   price={meal.price}
                 />
-            ))}
+              ))
+            }
           </ul>
         </Card>
       </section>
