@@ -24,7 +24,7 @@ const App = () =>{
         <Foods/>
       </main>
     </CartProvider>
-  );
+  )
 };
 
 export default App;

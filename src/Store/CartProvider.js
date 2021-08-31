@@ -2,7 +2,7 @@
 import CartContext from "./CartContext";
 import React, { useReducer } from "react";
 
-const defaultCartstate = {    // Seteo estado inicial del Cart
+const defaultCartstate = {
   items: [],
   totalAmount: 0
 };
@@ -46,6 +46,10 @@ const cartReducer = (state, action) => {
     };
   };
 
+  if (action.type === "CLEAR") {
+    return defaultCartstate;
+  };
+
   return defaultCartstate;  
 };
 
@@ -60,11 +64,16 @@ const CartProvider = (props) => {
     dispatch({type: "REMOVE", id: id});
   };
 
+  const clearCartHandler = () => {
+    dispatch({type: "CLEAR"});
+  }; 
+
   const cartContext = {     // setting the concrete context values, updated over time
     items: cartState.items,
     totalAmount: cartState.totalAmount,
     addItem: addItemToCartHandler, 
-    removeItem: removeItemFromCartHandler
+    removeItem: removeItemFromCartHandler,
+    clearCart: clearCartHandler
   };
 
   return (

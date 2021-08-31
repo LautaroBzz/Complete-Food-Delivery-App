@@ -41,7 +41,7 @@ const HeaderCartButton = (props) => {
         <span className={classes.badge}>{totalNumberOfItems}</span>
       </button>
     </>
-  );
-}
+  )
+};
  
 export default HeaderCartButton;

@@ -28,3 +28,8 @@
   text-align: center;
   color: white;
 }
+
+.error {
+  text-align: center;
+  color: rgb(219, 54, 54);
+}
